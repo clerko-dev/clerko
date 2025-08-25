@@ -1,23 +1,24 @@
-// app/tools/page.tsx
 import Link from "next/link";
-const tools = [
-  { href: "/tools/csv-to-json", title: "CSV → JSON" },
-  { href: "/tools/pdf-merge", title: "PDF Merge" },
-  { href: "/tools/image-to-webp", title: "Image → WebP" },
-  { href: "/tools/text-cleaner", title: "Text Cleaner" },
-  { href: "/tools/slugify", title: "Slugify" },
+const items = [
+  { slug: "csv-to-json", name: "CSV → JSON" },
+  { slug: "pdf-merge", name: "PDF Merge" },
+  { slug: "image-to-webp", name: "Image → WEBP" },
+  { slug: "text-cleaner", name: "Text Cleaner" },
+  { slug: "slugify", name: "Slugify" },
 ];
-export default function ToolsIndex() {
+export const metadata = { title: "Clerko — Tools" };
+export default function ToolsPage() {
   return (
-    <main className="max-w-3xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-4">Clerko Tools</h1>
-      <ul className="grid gap-3">
-        {tools.map(t => (
-          <li key={t.href} className="border rounded p-3 hover:bg-gray-50">
-            <Link href={t.href} className="font-medium">{t.title}</Link>
-          </li>
+    <div>
+      <h1 className="text-3xl font-bold mb-4">Tools</h1>
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {items.map(it => (
+          <Link key={it.slug} href={`/tools/${it.slug}`} className="rounded-xl border border-white/10 bg-white/5 p-4 hover:bg-white/10">
+            <div className="font-medium">{it.name}</div>
+            <div className="text-sm text-white/70">Open tool</div>
+          </Link>
         ))}
-      </ul>
-    </main>
+      </div>
+    </div>
   );
 }
