@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://clerko.vercel.app";
+const isIndexable = process.env.NEXT_PUBLIC_INDEXABLE === "1";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -24,7 +25,12 @@ export const metadata: Metadata = {
     description: "Create proposals and quotes in minutes. Templates, export, tracking.",
     images: ["/og-default.png"],
   },
-  robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
+  robots: {
+    index: isIndexable,
+    follow: isIndexable,
+    googleBot: { index: isIndexable, follow: isIndexable },
+  },
+  // verification: { google: "WPROWADZIMY PRZY GO-LIVE" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
