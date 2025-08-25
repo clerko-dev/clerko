@@ -26,10 +26,10 @@ export const metadata: Metadata = {
     images: ["/og-default.png"],
   },
   robots: {
-    index: isIndexable,
-    follow: isIndexable,
-    googleBot: { index: isIndexable, follow: isIndexable },
-  },
+  index: false,
+  follow: false,
+  googleBot: { index: false, follow: false },
+},
   // verification: { google: "WPROWADZIMY PRZY GO-LIVE" },
 };
 
