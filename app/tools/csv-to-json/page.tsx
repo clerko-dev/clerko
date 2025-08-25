@@ -1,5 +1,8 @@
+// app/tools/csv-to-json/page.tsx
 "use client";
 import { useState } from "react";
+
+type Row = Record<string, string>;
 
 export default function CsvToJson() {
   const [csv, setCsv] = useState("");
@@ -9,8 +12,9 @@ export default function CsvToJson() {
     const lines = csv.trim().split(/\r?\n/);
     if (!lines.length) return setJson("[]");
     const headers = lines[0].split(",").map(h => h.trim());
-    const rows = lines.slice(1).map(line => {
-      const cols = line.split(","); const obj: any = {};
+    const rows: Row[] = lines.slice(1).map(line => {
+      const cols = line.split(",");
+      const obj: Row = {};
       headers.forEach((h, i) => (obj[h] = (cols[i] ?? "").trim()));
       return obj;
     });

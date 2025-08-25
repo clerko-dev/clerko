@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { useState } from "react";
 
@@ -16,7 +17,7 @@ export default function ImageToWebp() {
       ctx.drawImage(bitmap, 0, 0);
       const webpData = canvas.toDataURL("image/webp", 0.9);
       setOut(webpData);
-    } catch (e) {
+    } catch {
       setOut("Error: can't load/convert this image URL.");
     }
   };
@@ -26,7 +27,9 @@ export default function ImageToWebp() {
       <h1 className="text-2xl font-bold mb-3">Image → WebP</h1>
       <input className="w-full border rounded p-2" placeholder="Paste image URL (jpg/png)" value={url} onChange={e=>setUrl(e.target.value)} />
       <button onClick={convert} className="mt-3 px-4 py-2 bg-blue-600 text-white rounded">Convert</button>
-      {out && (out.startsWith("data:") ? <img src={out} alt="webp" className="mt-3 max-w-full rounded" /> : <p className="mt-3 text-red-600">{out}</p>)}
+      {out && (out.startsWith("data:")
+        ? <img src={out} alt="webp result" className="mt-3 max-w-full rounded" />
+        : <p className="mt-3 text-red-600">{out}</p>)}
     </main>
   );
 }
