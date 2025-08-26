@@ -1,61 +1,42 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Inter } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import AnchorScrollFix from "@/components/ux/AnchorScrollFix";
 
-const inter = Inter({ subsets: ["latin"] });
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://clerko.vercel.app";
-const isIndexable = process.env.NEXT_PUBLIC_INDEXABLE === "1";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: { default: "Clerko — Proposals & quotes in minutes", template: "%s — Clerko" },
-  description: "Create proposals and quotes in minutes. Templates, export, tracking.",
-  alternates: { canonical: "/" },
+  title: "Clerko — proposals & quotes in minutes",
+  description:
+    "Create clean proposals in minutes. Templates, export, tracking.",
+  metadataBase:
+    process.env.NEXT_PUBLIC_SITE_URL
+      ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
+      : new URL("https://clerko.vercel.app"),
   openGraph: {
-    type: "website",
+    title: "Clerko — proposals & quotes in minutes",
+    description:
+      "Create clean proposals in minutes. Templates, export, tracking.",
     url: "/",
-    title: "Clerko — Proposals & quotes in minutes",
-    description: "Create proposals and quotes in minutes. Templates, export, tracking.",
-    images: [{ url: "/og-default.png", width: 1200, height: 630, alt: "Clerko" }],
+    siteName: "Clerko",
+    images: [{ url: "/og-default.png", width: 1200, height: 630 }],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Clerko — Proposals & quotes in minutes",
-    description: "Create proposals and quotes in minutes. Templates, export, tracking.",
-    images: ["/og-default.png"],
-  },
-  robots: {
-    index: isIndexable,
-    follow: isIndexable,
-    googleBot: { index: isIndexable, follow: isIndexable },
-  },
+  robots:
+    process.env.NEXT_PUBLIC_NOINDEX === "1"
+      ? { index: false, follow: false }
+      : { index: true, follow: true },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body className={`${inter.className} min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased`}>
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-black text-white px-3 py-1 rounded"
-        >
-          Skip to content
-        </a>
-
-        {/* globalny fixer kotwic */}
+      <body>
         <AnchorScrollFix />
-
         <Navbar />
-
-        {/* stała szerokość + padding strony */}
-        <main id="main" className="mx-auto max-w-7xl px-4 md:px-6 py-8">
-          {children}
-        </main>
-
+        <main className="mx-auto max-w-7xl px-4 md:px-6 py-10">{children}</main>
         <Footer />
       </body>
     </html>
