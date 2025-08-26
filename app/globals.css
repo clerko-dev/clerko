@@ -2,17 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Dark UI baseline */
 :root { color-scheme: dark; }
 
-/* Reusable glass utility (use in JSX: className="glass") */
-.glass { @apply bg-white/5 border border-white/10 backdrop-blur-lg; }
-
-/* Inputs – expand utilities directly (do NOT @apply custom classes like .glass) */
-.form-input {
-  @apply w-full p-3 rounded-lg bg-white/5 border border-white/10 backdrop-blur-lg
-         text-foreground placeholder:text-foreground/40
-         focus:outline-none focus:ring-2 focus:ring-brandStart;
+/* NIE ustawiaj tu @apply na body – robimy to w layout.tsx klasami */
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.form-textarea { @apply form-input min-h-[120px] resize-y; }
+/* Zamiast @apply – „glass” jako zwykły CSS, żeby nie straszyć builda */
+.glass {
+  background-color: rgba(255, 255, 255, 0.05); /* bg-white/5 */
+  border: 1px solid rgba(255, 255, 255, 0.1);  /* border-white/10 */
+  backdrop-filter: blur(16px);                 /* backdrop-blur-lg (typowo ~16px) */
+}
+
+/* Jeżeli używasz poniższych klas w formularzach i chcesz zachować wygląd: */
+.form-input {
+  width: 100%;
+  padding: 0.75rem;            /* p-3 */
+  border-radius: 0.5rem;       /* rounded-lg */
+  color: #e7e7ea;              /* text-foreground */
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  outline: none;
+}
+.form-input::placeholder { color: rgba(231, 231, 234, 0.4); } /* placeholder-foreground/40 */
+.form-input:focus { box-shadow: 0 0 0 2px #7C3AED33; }        /* pseudo ring-2 ring-brandStart */
+
+.form-textarea { min-height: 120px; resize: vertical; }
