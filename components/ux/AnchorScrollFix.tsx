@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 export default function AnchorScrollFix() {
   useEffect(() => {
-    const OFFSET = 72; // ~h-14 + zapas
+    const OFFSET = 72; // wysokość sticky nav + zapas
 
     const scrollToHash = (hash: string) => {
       const id = hash.replace(/^#/, "");
@@ -13,21 +13,31 @@ export default function AnchorScrollFix() {
       window.scrollTo({ top, behavior: "smooth" });
     };
 
-    // Kliknięcia w linki #anchor na tej samej trasie
-    const onClick = (e: MouseEvent) => {
-      const a = (e.target as HTMLElement)?.closest("a[href^='#']") as HTMLAnchorElement | null;
-      if (!a) return;
-      // ta sama strona
-      if (a.pathname === window.location.pathname && a.hash) {
-        e.preventDefault();
-        scrollToHash(a.hash);
-      }
-    };
-
-    // Na load – jeśli w URL już jest hash
+    // 1) Po wejściu z hashem
     if (window.location.hash) {
       setTimeout(() => scrollToHash(window.location.hash), 0);
     }
+
+    // 2) Delegacja klików – obsługuj a[href*="#"]
+    const onClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      const a = target?.closest("a[href*='#']") as HTMLAnchorElement | null;
+      if (!a) return;
+
+      try {
+        const url = new URL(a.href, window.location.href);
+        const sameOrigin = url.origin === window.location.origin;
+        const samePath = url.pathname === window.location.pathname;
+
+        // Przewijamy płynnie tylko gdy ten sam dokument
+        if (sameOrigin && samePath && url.hash) {
+          e.preventDefault();
+          scrollToHash(url.hash);
+        }
+      } catch {
+        /* ignore malformed href */
+      }
+    };
 
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);

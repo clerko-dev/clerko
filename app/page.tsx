@@ -42,74 +42,60 @@ export default function Page() {
     URL.revokeObjectURL(url);
   };
 
-  const smoothToTry: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
-    e.preventDefault();
-    document
-      .getElementById("try")
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+  const inputBase =
+    "mt-1 w-full rounded-lg bg-white/[0.06] border border-white/10 px-3 py-2 outline-none focus:ring-2 focus:ring-white/20 placeholder:text-white/40";
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-14">
       {/* HERO */}
-      <section className="rounded-2xl bg-hero p-8 md:p-12 text-center">
+      <section className="rounded-2xl bg-hero px-6 py-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
           Proposals & quotes{" "}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#7C3AED] to-[#22D3EE]">
             in minutes
           </span>
         </h1>
-        <p className="mt-3 text-white/70">
+        <p className="mt-4 text-white/75">
           Type a few fields, see the preview, copy or export.
         </p>
-        <div className="mt-6 flex justify-center">
-          <a
-            href="#try"
-            onClick={smoothToTry}
-            className="inline-flex items-center rounded-lg text-sm font-medium px-4 py-2 bg-white text-black hover:bg-white/90"
-          >
-            Try free
+        <div className="mt-6 flex justify-center gap-3">
+          <a href="/#try">
+            <Button>Try free</Button>
+          </a>
+          <a href="/tools">
+            <Button variant="secondary">Browse tools</Button>
           </a>
         </div>
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="grid md:grid-cols-3 gap-4">
+      <section className="grid md:grid-cols-3 gap-5">
         <GlassCard>
-          <div className="text-sm uppercase tracking-wide text-white/60 mb-2">
-            Step 1
-          </div>
+          <div className="text-xs tracking-widest text-white/60 mb-1">STEP 1</div>
           <div className="font-semibold">Fill client & scope</div>
-          <div className="text-sm text-white/70 mt-1">
+          <p className="text-sm text-white/70 mt-1">
             Add client name, service and price. Optional notes for timing or
             milestones.
-          </div>
+          </p>
         </GlassCard>
         <GlassCard>
-          <div className="text-sm uppercase tracking-wide text-white/60 mb-2">
-            Step 2
-          </div>
+          <div className="text-xs tracking-widest text-white/60 mb-1">STEP 2</div>
           <div className="font-semibold">Preview instantly</div>
-          <div className="text-sm text-white/70 mt-1">
+          <p className="text-sm text-white/70 mt-1">
             Your proposal renders live. Tweak text until it reads perfectly.
-          </div>
+          </p>
         </GlassCard>
         <GlassCard>
-          <div className="text-sm uppercase tracking-wide text-white/60 mb-2">
-            Step 3
-          </div>
+          <div className="text-xs tracking-widest text-white/60 mb-1">STEP 3</div>
           <div className="font-semibold">Copy or export</div>
-          <div className="text-sm text-white/70 mt-1">
+          <p className="text-sm text-white/70 mt-1">
             Copy to clipboard or download .txt. PDF & saved templates in Pro.
-          </div>
+          </p>
         </GlassCard>
       </section>
 
       {/* GENERATOR + PREVIEW */}
-      <section
-        id="try"
-        className="grid md:grid-cols-2 gap-6 anchor-offset"
-      >
+      <section id="try" className="grid md:grid-cols-2 gap-6 anchor-offset">
         <GlassCard>
           <div className="grid gap-4">
             <label className="text-sm block">
@@ -119,7 +105,7 @@ export default function Page() {
                 onChange={(e) => setClient(e.target.value)}
                 placeholder="e.g., ACME LLC"
                 autoComplete="organization"
-                className="mt-1 w-full rounded-lg bg-black/30 border border-white/10 px-3 py-2 outline-none focus:ring-2 focus:ring-white/20"
+                className={inputBase}
               />
             </label>
 
@@ -129,7 +115,7 @@ export default function Page() {
                 value={service}
                 onChange={(e) => setService(e.target.value)}
                 placeholder="e.g., Website + copy"
-                className="mt-1 w-full rounded-lg bg-black/30 border border-white/10 px-3 py-2 outline-none focus:ring-2 focus:ring-white/20"
+                className={inputBase}
               />
             </label>
 
@@ -140,7 +126,7 @@ export default function Page() {
                 onChange={(e) => setPrice(e.target.value)}
                 placeholder="e.g., $1,990"
                 inputMode="decimal"
-                className="mt-1 w-full rounded-lg bg-black/30 border border-white/10 px-3 py-2 outline-none focus:ring-2 focus:ring-white/20"
+                className={inputBase}
               />
             </label>
 
@@ -151,12 +137,16 @@ export default function Page() {
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder="Requirements, timeline, milestones…"
                 rows={4}
-                className="mt-1 w-full rounded-lg bg-black/30 border border-white/10 px-3 py-2 outline-none focus:ring-2 focus:ring-white/20"
+                className={`${inputBase} resize-vertical`}
               />
             </label>
-            <Button className="mt-2" type="button">
-              Generate preview
-            </Button>
+
+            <div className="flex gap-2">
+              <Button type="button">Generate preview</Button>
+              <Button type="button" variant="secondary" onClick={() => { setClient(""); setService(""); setPrice(""); setNotes(""); }}>
+                Clear
+              </Button>
+            </div>
           </div>
         </GlassCard>
 
@@ -173,9 +163,7 @@ export default function Page() {
               <span
                 aria-live="polite"
                 className={`text-xs px-2 py-1 rounded-md border transition-opacity ${
-                  copied
-                    ? "opacity-100 bg-white/10 border-white/20"
-                    : "opacity-0"
+                  copied ? "opacity-100 bg-white/10 border-white/20" : "opacity-0"
                 }`}
               >
                 Copied!
@@ -185,7 +173,7 @@ export default function Page() {
           <textarea
             readOnly
             value={proposal}
-            className="min-h-[280px] w-full rounded-lg bg-black/30 border border-white/10 p-3 text-sm font-mono"
+            className="min-h-[300px] w-full rounded-lg bg-black/40 border border-white/10 p-3 text-sm font-mono"
           />
           <p className="mt-3 text-xs text-white/60">
             Pro tip: Pro plan adds PDF export, saved templates, and branding.

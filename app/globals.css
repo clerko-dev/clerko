@@ -77,4 +77,5 @@ html { scroll-behavior: smooth; }
 }
 
 /* Offset sekcji zakotwiczonych (#try) pod sticky navbar */
+html { scroll-behavior: smooth; }
 .anchor-offset { scroll-margin-top: 72px; }
