@@ -6,9 +6,10 @@ interface LinkButtonProps {
   children: React.ReactNode;
   variant?: "primary" | "secondary";
   className?: string;
+  onClick?: () => void; // Dodałem 'onClick' do typów
 }
 
-export default function LinkButton({ href, children, variant = "primary", className }: LinkButtonProps) {
+export default function LinkButton({ href, children, variant = "primary", className, onClick }: LinkButtonProps) {
   const baseClasses = clsx(
     "rounded-xl px-6 py-3 font-semibold transition-all duration-200",
     "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brandEnd"
@@ -19,7 +20,7 @@ export default function LinkButton({ href, children, variant = "primary", classN
   };
 
   return (
-    <Link href={href} className={clsx(baseClasses, variantClasses[variant], className)}>
+    <Link href={href} className={clsx(baseClasses, variantClasses[variant], className)} onClick={onClick}>
       {children}
     </Link>
   );

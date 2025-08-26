@@ -3,11 +3,13 @@ import clsx from "clsx";
 interface ButtonProps {
   children: React.ReactNode;
   className?: string;
+  onClick?: () => void; // Dodałem 'onClick' do typów
 }
 
-export default function Button({ children, className }: ButtonProps) {
+export default function Button({ children, className, onClick }: ButtonProps) {
   return (
     <button
+      onClick={onClick}
       className={clsx(
         "rounded-xl px-6 py-3 font-semibold text-white transition-all duration-200",
         "bg-gradient-to-r from-brandStart to-brandEnd shadow-lg shadow-black/30",
