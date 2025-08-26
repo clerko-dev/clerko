@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     images: "/og-default.png",
   },
 };
-
+// Wymuszenie aktualizacji Vercel
 export default function RootLayout({
   children,
 }: Readonly<{
