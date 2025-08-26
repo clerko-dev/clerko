@@ -1,8 +1,13 @@
-﻿import * as React from "react";
+﻿import clsx from "clsx";
 
-export default function GlassCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+interface GlassCardProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export default function GlassCard({ children, className }: GlassCardProps) {
   return (
-    <div className={`glass glass-hover rounded-2xl p-5 md:p-6 ${className}`}>
+    <div className={clsx("glass rounded-xl p-6 md:p-8", className)}>
       {children}
     </div>
   );

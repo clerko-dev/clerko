@@ -1,43 +1,55 @@
-import "./globals.css";
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import AnchorScrollFix from "@/components/ux/AnchorScrollFix";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Clerko — proposals & quotes in minutes",
-  description:
-    "Create clean proposals in minutes. Templates, export, tracking.",
-  metadataBase:
-    process.env.NEXT_PUBLIC_SITE_URL
-      ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
-      : new URL("https://clerko.vercel.app"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
+  title: "Clerko - Proposals & quotes in minutes",
+  description: "Quickly generate professional proposals and quotes for your clients. Try our intuitive proposal generator for free.",
   openGraph: {
-    title: "Clerko — proposals & quotes in minutes",
-    description:
-      "Create clean proposals in minutes. Templates, export, tracking.",
+    title: "Clerko - Proposals & quotes in minutes",
+    description: "Type a few fields, get a clean proposal. Export, copy, send. The fastest way to close deals.",
     url: "/",
     siteName: "Clerko",
-    images: [{ url: "/og-default.png", width: 1200, height: 630 }],
+    images: "/og-default.png",
+    locale: "en_US",
+    type: "website",
   },
-  robots:
-    process.env.NEXT_PUBLIC_NOINDEX === "1"
-      ? { index: false, follow: false }
-      : { index: true, follow: true },
+  twitter: {
+    card: "summary_large_image",
+    title: "Clerko - Proposals & quotes in minutes",
+    description: "Type a few fields, get a clean proposal. Export, copy, send. The fastest way to close deals.",
+    images: "/og-default.png",
+  },
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en">
-      <body>
-        <AnchorScrollFix />
+      <body className={inter.className}>
         <Navbar />
-        <main className="mx-auto max-w-7xl px-4 md:px-6 py-10">{children}</main>
+        <main className="container mx-auto px-4 max-w-5xl py-24 min-h-screen">
+          {children}
+        </main>
         <Footer />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-XXXX');
+            `,
+          }}
+        />
       </body>
     </html>
   );

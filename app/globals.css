@@ -2,82 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-/* === Theme tokens === */
 :root {
-  --background: #0b0c10;
-  --foreground: #e9edf3;
-  --card-bg: rgba(255,255,255,.04);
-  --card-border: rgba(255,255,255,.10);
-  --ring: rgba(255,255,255,.20);
-  --grad-a: #7C3AED;  /* violet */
-  --grad-b: #22D3EE;  /* cyan  */
+  --brand-start: #7C3AED;
+  --brand-end: #22D3EE;
 }
-
-html { color-scheme: dark; scroll-behavior: smooth; }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica Neue, Arial, sans-serif;
-  background-image:
-    radial-gradient(900px 400px at 50% -200px, rgba(124,58,237,.20), transparent 60%),
-    radial-gradient(700px 300px at 80% -180px, rgba(34,211,238,.18), transparent 60%),
-    radial-gradient(600px 250px at 20% -150px, rgba(255,255,255,.06), transparent 60%),
-    linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
-  background-attachment: fixed;
+  background-color: #0b0b0f;
+  color: #e7e7ea;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom components */
-.bg-hero {
-  border: 1px solid var(--card-border);
-  background:
-    radial-gradient(60% 100% at 50% 0%, rgba(124,58,237,.18), transparent 70%),
-    radial-gradient(55% 90% at 60% -10%, rgba(34,211,238,.16), transparent 65%),
-    linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));
-}
-
+/* Custom utility for glass effect */
 .glass {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.glass-hover { transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
-.glass-hover:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.18); box-shadow: 0 14px 40px rgba(0,0,0,.45); }
 
-.btn-primary {
-  @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium;
-  background-image: linear-gradient(90deg, var(--grad-a), var(--grad-b));
-  color: white;
-  border: 1px solid rgba(255,255,255,.10);
-  transition: filter .15s ease, transform .15s ease;
+/* Custom anchor offset for sticky navbar */
+.anchor-offset::before {
+  content: '';
+  display: block;
+  height: 80px; /* Adjust this value to the height of your fixed navbar */
+  margin-top: -80px;
+  visibility: hidden;
 }
-.btn-primary:hover { filter: brightness(1.05); transform: translateY(-1px); }
 
-.btn-secondary {
-  @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium;
-  background: rgba(255,255,255,.08);
-  color: white;
-  border: 1px solid rgba(255,255,255,.14);
-  transition: background .15s ease, transform .15s ease;
+@layer components {
+  .input {
+    @apply w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-brandStart;
+  }
+  .textarea {
+    @apply w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/40 min-h-[120px] focus:outline-none focus:ring-2 focus:ring-brandStart resize-y;
+  }
 }
-.btn-secondary:hover { background: rgba(255,255,255,.12); transform: translateY(-1px); }
-
-/* Inputs styling */
-.input {
-  width: 100%;
-  border-radius: 10px;
-  padding: .55rem .75rem;
-  border: 1px solid var(--card-border);
-  background: rgba(255,255,255,.06);
-  color: var(--foreground);
-  outline: none;
-  transition: box-shadow .15s ease, border-color .15s ease, background .15s ease;
-}
-.input::placeholder { color: rgba(233,237,243,.45); }
-.input:focus { border-color: var(--ring); box-shadow: 0 0 0 4px rgba(255,255,255,.08) inset; background: rgba(255,255,255,.08); }
-
-.textarea { @apply input; resize: vertical; min-height: 160px; }
-
-/* Anchor offset for sticky nav */
-.anchor-offset { scroll-margin-top: 80px; }

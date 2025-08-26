@@ -1,32 +1,39 @@
-"use client";
 import Link from "next/link";
-import Logo from "@/components/ui/Logo";
-import LinkButton from "@/components/ui/LinkButton";
-import { useEffect, useState } from "react";
 
-export default function Navbar() {
-  const [opaque, setOpaque] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setOpaque(window.scrollY > 10);
-    onScroll(); window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
+export default function Footer() {
   return (
-    <header className={`sticky top-0 z-40 backdrop-blur ${opaque ? "bg-black/40 border-b border-white/10" : "bg-transparent border-b border-transparent"}`}>
-      <div className="mx-auto max-w-7xl px-4 md:px-6 h-14 flex items-center justify-between">
-        <Logo />
-        <nav className="hidden md:flex items-center gap-6 text-sm text-white/80">
-          <Link href="/tools" className="hover:text-white">Tools</Link>
-          <Link href="/how-to" className="hover:text-white">Guides</Link>
-          <Link href="/store" className="hover:text-white">Store</Link>
-        </nav>
-        <div className="flex items-center gap-2">
-          <LinkButton href="#try" variant="primary" className="hidden sm:inline-flex">
-            Try free
-          </LinkButton>
+    <footer className="bg-black/20 border-t border-white/10 mt-16 py-12">
+      <div className="container mx-auto px-4 max-w-5xl grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div>
+          <h4 className="font-semibold text-white mb-4">Product</h4>
+          <ul className="space-y-2 text-white/70">
+            <li><Link href="/tools">Tools</Link></li>
+            <li><Link href="/how-to">Guides</Link></li>
+            <li><Link href="/store">Templates Store</Link></li>
+            <li><Link href="#try">Generator</Link></li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="font-semibold text-white mb-4">Company</h4>
+          <ul className="space-y-2 text-white/70">
+            <li><Link href="/about">About Us</Link></li>
+            <li><Link href="/contact">Contact</Link></li>
+            <li><Link href="/blog">Blog</Link></li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="font-semibold text-white mb-4">Legal</h4>
+          <ul className="space-y-2 text-white/70">
+            <li><Link href="/privacy">Privacy Policy</Link></li>
+            <li><Link href="/terms">Terms of Service</Link></li>
+            <li><Link href="/legal">Legal</Link></li>
+          </ul>
+        </div>
+        <div className="col-span-2 md:col-span-1">
+          <p className="text-sm text-white/50">&copy; {new Date().getFullYear()} Clerko. All rights reserved.</p>
+          <p className="text-sm text-white/50 mt-2">Built for freelancers and agencies to close deals faster.</p>
         </div>
       </div>
-    </header>
+    </footer>
   );
 }

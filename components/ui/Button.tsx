@@ -1,10 +1,21 @@
-import * as React from "react";
+import clsx from "clsx";
 
-type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "primary" | "secondary";
-};
+interface ButtonProps {
+  children: React.ReactNode;
+  className?: string;
+}
 
-export default function Button({ variant = "primary", className = "", ...props }: Props) {
-  const base = variant === "secondary" ? "btn-secondary" : "btn-primary";
-  return <button className={`${base} ${className}`} {...props} />;
+export default function Button({ children, className }: ButtonProps) {
+  return (
+    <button
+      className={clsx(
+        "rounded-xl px-6 py-3 font-semibold text-white transition-all duration-200",
+        "bg-gradient-to-r from-brandStart to-brandEnd shadow-lg shadow-black/30",
+        "hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brandEnd",
+        className
+      )}
+    >
+      {children}
+    </button>
+  );
 }
