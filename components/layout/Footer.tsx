@@ -1,30 +1,32 @@
+"use client";
 import Link from "next/link";
-export default function Footer() {
+import Logo from "@/components/ui/Logo";
+import LinkButton from "@/components/ui/LinkButton";
+import { useEffect, useState } from "react";
+
+export default function Navbar() {
+  const [opaque, setOpaque] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setOpaque(window.scrollY > 10);
+    onScroll(); window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <footer className="mt-16 border-t border-white/10">
-      <div className="mx-auto max-w-7xl px-4 md:px-6 py-10 grid sm:grid-cols-3 gap-8 text-sm">
-        <div className="opacity-80">
-          <div className="font-semibold">Clerko</div>
-          <p className="text-white/60 mt-2">Create proposals and quotes in minutes. Templates, export, tracking.</p>
-        </div>
-        <div>
-          <div className="font-semibold mb-2">Product</div>
-          <ul className="space-y-1 text-white/70">
-            <li><Link href="/tools" className="hover:text-white">Tools</Link></li>
-            <li><Link href="/how-to" className="hover:text-white">Guides</Link></li>
-            <li><Link href="/store" className="hover:text-white">Templates Store</Link></li>
-          </ul>
-        </div>
-        <div>
-          <div className="font-semibold mb-2">Company</div>
-          <ul className="space-y-1 text-white/70">
-            <li><Link href="/privacy" className="hover:text-white">Privacy</Link></li>
-            <li><Link href="/terms" className="hover:text-white">Terms</Link></li>
-            <li><a href="mailto:hello@clerko.app" className="hover:text-white">Contact</a></li>
-          </ul>
+    <header className={`sticky top-0 z-40 backdrop-blur ${opaque ? "bg-black/40 border-b border-white/10" : "bg-transparent border-b border-transparent"}`}>
+      <div className="mx-auto max-w-7xl px-4 md:px-6 h-14 flex items-center justify-between">
+        <Logo />
+        <nav className="hidden md:flex items-center gap-6 text-sm text-white/80">
+          <Link href="/tools" className="hover:text-white">Tools</Link>
+          <Link href="/how-to" className="hover:text-white">Guides</Link>
+          <Link href="/store" className="hover:text-white">Store</Link>
+        </nav>
+        <div className="flex items-center gap-2">
+          <LinkButton href="#try" variant="primary" className="hidden sm:inline-flex">
+            Try free
+          </LinkButton>
         </div>
       </div>
-      <div className="text-xs text-white/50 py-6 text-center border-t border-white/10">© {new Date().getFullYear()} Clerko — proposal OS.</div>
-    </footer>
+    </header>
   );
 }

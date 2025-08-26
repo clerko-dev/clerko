@@ -1,8 +1,10 @@
-import React from "react";
+import * as React from "react";
+
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: "primary" | "secondary";
 };
-export default function Button({ variant = "primary", className = "", ...rest }: Props) {
-  const classes = variant === "primary" ? "btn-primary" : "btn-secondary";
-  return <button className={`${classes} ${className}`} {...rest} />;
+
+export default function Button({ variant = "primary", className = "", ...props }: Props) {
+  const base = variant === "secondary" ? "btn-secondary" : "btn-primary";
+  return <button className={`${base} ${className}`} {...props} />;
 }
