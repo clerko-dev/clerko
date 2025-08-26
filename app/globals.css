@@ -47,6 +47,15 @@ a {
   }
 }
 /* --- HERO BACKGROUND --- */
+/* Domyślnie ciemny motyw, spójny z mockiem */
+:root {
+  --background: #0b0b10;
+  --foreground: #e8eaf0;
+}
+
+/* Płynne przewijanie hash-linków */
+html { scroll-behavior: smooth; }
+
 /* Hero gradient background */
 .bg-hero {
   position: relative;
@@ -66,7 +75,6 @@ a {
   box-shadow: 0 10px 24px rgba(0,0,0,0.25);
   border-color: rgba(255,255,255,0.2);
 }
-/* Offset dla kotwicy za sticky navbar (h-14 ~ 56px) */
-.anchor-offset {
-  scroll-margin-top: 72px; /* bezpieczny zapas */
-}
+
+/* Offset sekcji zakotwiczonych (#try) pod sticky navbar */
+.anchor-offset { scroll-margin-top: 72px; }

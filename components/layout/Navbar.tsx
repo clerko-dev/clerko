@@ -31,20 +31,6 @@ function NavItem({ href, label }: { href: string; label: string }) {
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const pathname = usePathname();
-
-  const handleTryClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // Jeśli jesteśmy na stronie głównej — płynne przewinięcie do #try
-    if (pathname === "/") {
-      e.preventDefault();
-      document
-        .getElementById("try")
-        ?.scrollIntoView({ behavior: "smooth", block: "start" });
-      setOpen(false);
-    }
-    // Jeśli jesteśmy na innej trasie — Link zrobi nawigację do "/#try"
-    // (po przejściu anchor zadziała sam z siebie)
-  };
 
   return (
     <header className="sticky top-0 z-40 backdrop-blur bg-black/30 border-b border-white/10">
@@ -57,7 +43,6 @@ export default function Navbar() {
           ))}
           <Link
             href="/#try"
-            onClick={handleTryClick}
             className="ml-2 inline-flex items-center rounded-lg text-sm font-medium px-3 py-1.5 bg-white text-black hover:bg-white/90"
           >
             Try free
@@ -95,11 +80,8 @@ export default function Navbar() {
             ))}
             <Link
               href="/#try"
-              onClick={(e) => {
-                handleTryClick(e);
-                setOpen(false);
-              }}
               className="mt-1 inline-flex w-fit items-center rounded-lg text-sm font-medium px-3 py-1.5 bg-white text-black hover:bg-white/90"
+              onClick={() => setOpen(false)}
             >
               Try free
             </Link>

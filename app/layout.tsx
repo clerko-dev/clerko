@@ -3,6 +3,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import AnchorScrollFix from "@/components/ux/AnchorScrollFix";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,7 +33,6 @@ export const metadata: Metadata = {
     follow: isIndexable,
     googleBot: { index: isIndexable, follow: isIndexable },
   },
-  // verification: { google: "ADD_WHEN_GO_LIVE" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -46,8 +46,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
 
+        {/* globalny fixer kotwic */}
+        <AnchorScrollFix />
+
         <Navbar />
 
+        {/* stała szerokość + padding strony */}
         <main id="main" className="mx-auto max-w-7xl px-4 md:px-6 py-8">
           {children}
         </main>
