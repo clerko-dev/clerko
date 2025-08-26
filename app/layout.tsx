@@ -34,8 +34,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className="h-full">
+      <body className="min-h-screen bg-background text-foreground antialiased">
         <Navbar />
         <main className="container mx-auto px-4 max-w-5xl py-24 min-h-screen">
           {children}
