@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Block indexing on Vercel preview URLs
+# Change this for your production environment if needed
+User-agent: *
+Disallow: /

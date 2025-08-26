@@ -3,40 +3,24 @@
 @tailwind utilities;
 
 :root {
-  --brand-start: #7C3AED;
-  --brand-end: #22D3EE;
+  color-scheme: dark;
 }
 
 body {
-  background-color: #0b0b0f;
-  color: #e7e7ea;
+  @apply bg-background text-foreground;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom utility for glass effect */
 .glass {
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  @apply bg-white/5 border border-white/10 backdrop-blur-lg;
 }
 
-/* Custom anchor offset for sticky navbar */
-.anchor-offset::before {
-  content: '';
-  display: block;
-  height: 80px; /* Adjust this value to the height of your fixed navbar */
-  margin-top: -80px;
-  visibility: hidden;
+.form-input {
+  @apply w-full p-3 rounded-lg glass text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-brandStart;
 }
 
-@layer components {
-  .input {
-    @apply w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-brandStart;
-  }
-  .textarea {
-    @apply w-full p-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-white/40 min-h-[120px] focus:outline-none focus:ring-2 focus:ring-brandStart resize-y;
-  }
+.form-textarea {
+  @apply form-input min-h-[120px] resize-y;
 }

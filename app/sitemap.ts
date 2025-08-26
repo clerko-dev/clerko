@@ -1,12 +1,27 @@
-﻿export default async function sitemap() {
-  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://clerko.vercel.app";
-  const staticRoutes = ["/", "/tools", "/how-to", "/store", "/privacy", "/terms"];
-  const howTo = ["/how-to/write-a-project-proposal"];
-  const tools = ["/tools/csv-to-json","/tools/pdf-merge","/tools/image-to-webp","/tools/text-cleaner","/tools/slugify"];
-  return [...staticRoutes, ...howTo, ...tools].map((r) => ({
-    url: `${base}${r}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: r === "/" ? 1 : 0.7,
-  }));
-}
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://clerko.vercel.app/</loc>
+    <lastmod>2024-08-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://clerko.vercel.app/tools</loc>
+    <lastmod>2024-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://clerko.vercel.app/how-to</loc>
+    <lastmod>2024-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://clerko.vercel.app/store</loc>
+    <lastmod>2024-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>

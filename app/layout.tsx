@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-
-const inter = Inter({ subsets: ["latin"] });
+import CookieConsent from "@/components/layout/CookieConsent";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
-  title: "Clerko - Proposals & quotes in minutes",
-  description: "Quickly generate professional proposals and quotes for your clients. Try our intuitive proposal generator for free.",
+  title: {
+    default: "Clerko - Proposals & Quotes in Minutes",
+    template: "%s | Clerko"
+  },
+  description: "The fastest way for freelancers and agencies to create professional proposals and quotes. Generate, copy, and send in minutes.",
   openGraph: {
-    title: "Clerko - Proposals & quotes in minutes",
-    description: "Type a few fields, get a clean proposal. Export, copy, send. The fastest way to close deals.",
+    title: "Clerko - Proposals & Quotes in Minutes",
+    description: "The fastest way for freelancers and agencies to create professional proposals and quotes. Generate, copy, and send in minutes.",
     url: "/",
     siteName: "Clerko",
     images: "/og-default.png",
@@ -21,8 +22,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Clerko - Proposals & quotes in minutes",
-    description: "Type a few fields, get a clean proposal. Export, copy, send. The fastest way to close deals.",
+    title: "Clerko - Proposals & Quotes in Minutes",
+    description: "The fastest way for freelancers and agencies to create professional proposals and quotes. Generate, copy, and send in minutes.",
     images: "/og-default.png",
   },
 };
@@ -34,19 +35,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <Navbar />
         <main className="container mx-auto px-4 max-w-5xl py-24 min-h-screen">
           {children}
         </main>
         <Footer />
+        <CookieConsent />
+        {/* GA4 Script */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-XXXX');
+              gtag('config', 'G-XXXX'); // Zmień na swój identyfikator GA4
             `,
           }}
         />
