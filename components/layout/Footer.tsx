@@ -1,14 +1,11 @@
 import Link from "next/link";
-
 export default function Footer() {
   return (
     <footer className="mt-16 border-t border-white/10">
       <div className="mx-auto max-w-7xl px-4 md:px-6 py-10 grid sm:grid-cols-3 gap-8 text-sm">
         <div className="opacity-80">
           <div className="font-semibold">Clerko</div>
-          <p className="text-white/60 mt-2">
-            Create proposals and quotes in minutes. Templates, export, tracking.
-          </p>
+          <p className="text-white/60 mt-2">Create proposals and quotes in minutes. Templates, export, tracking.</p>
         </div>
         <div>
           <div className="font-semibold mb-2">Product</div>
@@ -27,9 +24,7 @@ export default function Footer() {
           </ul>
         </div>
       </div>
-      <div className="text-xs text-white/50 py-6 text-center border-t border-white/10">
-        © {new Date().getFullYear()} Clerko — proposal OS.
-      </div>
+      <div className="text-xs text-white/50 py-6 text-center border-t border-white/10">© {new Date().getFullYear()} Clerko — proposal OS.</div>
     </footer>
   );
 }

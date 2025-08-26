@@ -34,13 +34,11 @@ export default function Page() {
   );
 
   const [copied, setCopied] = useState(false);
-
   const copy = async () => {
     await navigator.clipboard.writeText(proposal);
     setCopied(true);
     setTimeout(() => setCopied(false), 1400);
   };
-
   const downloadTxt = () => {
     const blob = new Blob([proposal], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
@@ -62,7 +60,7 @@ export default function Page() {
           </span>
         </h1>
         <p className="mt-4 text-white/75 max-w-2xl mx-auto">
-          Create clean proposals by filling 3 fields. Copy, download, or export (PDF soon).
+          Create clean proposals by filling three fields. Copy, download, or export (PDF soon).
         </p>
         <div className="mt-7 flex justify-center gap-3">
           <LinkButton href="/#try" className="btn-primary">Try free</LinkButton>
@@ -122,88 +120,37 @@ export default function Page() {
           <div className="grid gap-5">
             <label className="text-sm block">
               <span className="text-white/80">Client</span>
-              <input
-                value={client}
-                onChange={(e) => setClient(e.target.value)}
-                placeholder="e.g., ACME LLC"
-                autoComplete="organization"
-                className="input mt-2"
-              />
+              <input value={client} onChange={(e) => setClient(e.target.value)} placeholder="e.g., ACME LLC" autoComplete="organization" className="input mt-2" />
             </label>
-
             <label className="text-sm block">
               <span className="text-white/80">Service / Scope</span>
-              <input
-                value={service}
-                onChange={(e) => setService(e.target.value)}
-                placeholder="e.g., Website + copy"
-                className="input mt-2"
-              />
+              <input value={service} onChange={(e) => setService(e.target.value)} placeholder="e.g., Website + copy" className="input mt-2" />
             </label>
-
             <label className="text-sm block">
               <span className="text-white/80">Price</span>
-              <input
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                placeholder="e.g., $1,990"
-                inputMode="decimal"
-                className="input mt-2"
-              />
+              <input value={price} onChange={(e) => setPrice(e.target.value)} placeholder="e.g., $1,990" inputMode="decimal" className="input mt-2" />
             </label>
-
             <label className="text-sm block">
               <span className="text-white/80">Notes (optional)</span>
-              <textarea
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-                placeholder="Requirements, timeline, milestones…"
-                className="textarea mt-2"
-              />
+              <textarea value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Requirements, timeline, milestones…" className="textarea mt-2" />
             </label>
-
             <div className="flex flex-wrap gap-2">
               <Button type="button" className="btn-primary">Generate preview</Button>
-              <Button
-                type="button"
-                variant="secondary"
-                className="btn-secondary"
-                onClick={() => { setClient(""); setService(""); setPrice(""); setNotes(""); }}
-              >
-                Clear
-              </Button>
+              <Button type="button" variant="secondary" className="btn-secondary" onClick={() => { setClient(""); setService(""); setPrice(""); setNotes(""); }}>Clear</Button>
             </div>
           </div>
         </GlassCard>
-
         <GlassCard>
           <div className="flex items-center justify-between mb-3">
             <h2 className="font-semibold">Preview</h2>
             <div className="flex items-center gap-2">
-              <Button variant="secondary" className="btn-secondary" onClick={copy} aria-label="Copy proposal">
-                Copy
-              </Button>
-              <Button variant="secondary" className="btn-secondary" onClick={downloadTxt} aria-label="Download proposal as .txt">
-                Download .txt
-              </Button>
-              <span
-                aria-live="polite"
-                className={`text-xs px-2 py-1 rounded-md border transition-opacity ${
-                  copied ? "opacity-100 bg-white/10 border-white/20" : "opacity-0"
-                }`}
-              >
-                Copied!
-              </span>
+              <Button variant="secondary" className="btn-secondary" onClick={copy} aria-label="Copy proposal">Copy</Button>
+              <Button variant="secondary" className="btn-secondary" onClick={downloadTxt} aria-label="Download proposal">Download .txt</Button>
+              <span aria-live="polite" className={`text-xs px-2 py-1 rounded-md border transition-opacity ${copied ? "opacity-100 bg-white/10 border-white/20" : "opacity-0"}`}>Copied!</span>
             </div>
           </div>
-          <textarea
-            readOnly
-            value={proposal}
-            className="min-h-[320px] w-full rounded-lg bg-black/45 border border-white/10 p-3 text-sm font-mono"
-          />
-          <p className="mt-3 text-xs text-white/60">
-            Pro tip: Pro plan adds PDF export, saved templates, and branding.
-          </p>
+          <textarea readOnly value={proposal} className="min-h-[320px] w-full rounded-lg bg-black/45 border border-white/10 p-3 text-sm font-mono" />
+          <p className="mt-3 text-xs text-white/60">Pro tip: Pro plan adds PDF export, saved templates, and branding.</p>
         </GlassCard>
       </section>
     </div>

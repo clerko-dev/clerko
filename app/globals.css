@@ -6,12 +6,11 @@
 :root {
   --background: #0b0c10;
   --foreground: #e9edf3;
-  --muted: #b8c1d6;
   --card-bg: rgba(255,255,255,.04);
   --card-border: rgba(255,255,255,.10);
   --ring: rgba(255,255,255,.20);
-  --grad-a: #7C3AED;
-  --grad-b: #22D3EE;
+  --grad-a: #7C3AED;  /* violet */
+  --grad-b: #22D3EE;  /* cyan  */
 }
 
 html { color-scheme: dark; scroll-behavior: smooth; }
@@ -19,11 +18,7 @@ html { color-scheme: dark; scroll-behavior: smooth; }
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter,
-    "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica Neue, Arial, sans-serif;
   background-image:
     radial-gradient(900px 400px at 50% -200px, rgba(124,58,237,.20), transparent 60%),
     radial-gradient(700px 300px at 80% -180px, rgba(34,211,238,.18), transparent 60%),
@@ -32,14 +27,8 @@ body {
   background-attachment: fixed;
 }
 
-a { color: inherit; text-decoration: none; }
-::selection { background: rgba(124,58,237,.35); color: white; }
-
-*::-webkit-scrollbar { height: 10px; width: 10px; }
-*::-webkit-scrollbar-thumb { background: rgba(255,255,255,.18); border-radius: 8px; }
-
+/* Custom components */
 .bg-hero {
-  position: relative;
   border: 1px solid var(--card-border);
   background:
     radial-gradient(60% 100% at 50% 0%, rgba(124,58,237,.18), transparent 70%),
@@ -60,8 +49,8 @@ a { color: inherit; text-decoration: none; }
   @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium;
   background-image: linear-gradient(90deg, var(--grad-a), var(--grad-b));
   color: white;
-  transition: filter .15s ease, transform .15s ease;
   border: 1px solid rgba(255,255,255,.10);
+  transition: filter .15s ease, transform .15s ease;
 }
 .btn-primary:hover { filter: brightness(1.05); transform: translateY(-1px); }
 
@@ -74,14 +63,15 @@ a { color: inherit; text-decoration: none; }
 }
 .btn-secondary:hover { background: rgba(255,255,255,.12); transform: translateY(-1px); }
 
+/* Inputs styling */
 .input {
   width: 100%;
   border-radius: 10px;
   padding: .55rem .75rem;
   border: 1px solid var(--card-border);
   background: rgba(255,255,255,.06);
-  outline: none;
   color: var(--foreground);
+  outline: none;
   transition: box-shadow .15s ease, border-color .15s ease, background .15s ease;
 }
 .input::placeholder { color: rgba(233,237,243,.45); }
@@ -89,4 +79,5 @@ a { color: inherit; text-decoration: none; }
 
 .textarea { @apply input; resize: vertical; min-height: 160px; }
 
+/* Anchor offset for sticky nav */
 .anchor-offset { scroll-margin-top: 80px; }
