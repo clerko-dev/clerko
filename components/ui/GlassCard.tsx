@@ -9,8 +9,17 @@ export default function GlassCard({
 }) {
   return (
     <div
-      className={`rounded-2xl border border-white/10 bg-white/5 p-5 shadow-xl shadow-black/20 backdrop-blur glass-hover ${className}`}
+      className={`relative glass rounded-2xl p-5 md:p-6 glass-hover ${className}`}
     >
+      {/* delikatny gradient border via overlay */}
+      <div className="pointer-events-none absolute inset-0 rounded-2xl"
+           style={{
+             background:
+               "linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02))",
+             mask: "linear-gradient(#000,#000) content-box, linear-gradient(#000,#000)",
+             WebkitMask:
+               "linear-gradient(#000,#000) content-box, linear-gradient(#000,#000)",
+           }}/>
       {children}
     </div>
   );
