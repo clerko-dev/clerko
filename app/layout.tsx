@@ -2,49 +2,29 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import CookieConsent from "@/components/layout/CookieConsent";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
-  title: { default: "Clerko - Proposals & Quotes in Minutes", template: "%s | Clerko" },
-  description: "The fastest way for freelancers and agencies to create professional proposals and quotes. Generate, copy, and send in minutes.",
-  openGraph: {
-    title: "Clerko - Proposals & Quotes in Minutes",
-    description: "The fastest way for freelancers and agencies to create professional proposals and quotes. Generate, copy, and send in minutes.",
-    url: "/",
-    siteName: "Clerko",
-    images: "/og-default.png",
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Clerko - Proposals & Quotes in Minutes",
-    description: "The fastest way for freelancers and agencies to create professional proposals and quotes. Generate, copy, and send in minutes.",
-    images: "/og-default.png",
-  },
+  title: { default: "Clerko – Proposals & quotes in minutes", template: "%s | Clerko" },
+  description: "Quickly draft tailored proposals and quotes with our intuitive generator.",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className="bg-background text-foreground antialiased min-h-screen">
-        <Navbar />
-        <main className="container mx-auto px-4 max-w-5xl py-24 min-h-screen">
-          {children}
-        </main>
-        <Footer />
-        <CookieConsent />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-XXXX');
-            `,
+    <html lang="en" className="h-full scroll-smooth">
+      <body className="min-h-screen bg-background text-foreground antialiased selection:bg-white/10 selection:text-white">
+        {/* Soft hero gradient background */}
+        <div
+          aria-hidden
+          className="pointer-events-none fixed inset-0 -z-10"
+          style={{
+            background:
+              "radial-gradient(1200px 600px at 50% -20%, rgba(124,58,237,0.25), transparent 60%), " +
+              "radial-gradient(800px 400px at 80% 20%, rgba(34,211,238,0.2), transparent 60%)"
           }}
         />
+        <Navbar />
+        <main className="mx-auto max-w-6xl px-4 md:px-6 py-12 md:py-20">{children}</main>
+        <Footer />
       </body>
     </html>
   );
