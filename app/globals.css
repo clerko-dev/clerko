@@ -1,15 +1,18 @@
-/** Tailwind v4 global stylesheet */
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* Dark UI baseline */
 :root { color-scheme: dark; }
 
-/* Body styles now applied via className in app/layout.tsx */
+/* Reusable glass utility (use in JSX: className="glass") */
 .glass { @apply bg-white/5 border border-white/10 backdrop-blur-lg; }
 
+/* Inputs – expand utilities directly (do NOT @apply custom classes like .glass) */
 .form-input {
-  @apply w-full p-3 rounded-lg glass text-foreground placeholder:text-foreground/40
+  @apply w-full p-3 rounded-lg bg-white/5 border border-white/10 backdrop-blur-lg
+         text-foreground placeholder:text-foreground/40
          focus:outline-none focus:ring-2 focus:ring-brandStart;
 }
 
 .form-textarea { @apply form-input min-h-[120px] resize-y; }
-
