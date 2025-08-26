@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -30,32 +31,46 @@ function NavItem({ href, label }: { href: string; label: string }) {
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  const handleTryClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // Jeśli jesteśmy na stronie głównej — płynne przewinięcie do #try
+    if (pathname === "/") {
+      e.preventDefault();
+      document
+        .getElementById("try")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+      setOpen(false);
+    }
+    // Jeśli jesteśmy na innej trasie — Link zrobi nawigację do "/#try"
+    // (po przejściu anchor zadziała sam z siebie)
+  };
 
   return (
     <header className="sticky top-0 z-40 backdrop-blur bg-black/30 border-b border-white/10">
       <div className="mx-auto max-w-7xl px-4 md:px-6 h-14 flex items-center justify-between">
         <Logo />
-        {/* Desktop nav */}
+        {/* Desktop */}
         <nav className="hidden md:flex items-center gap-2">
           {LINKS.map((l) => (
             <NavItem key={l.href} {...l} />
           ))}
           <Link
             href="/#try"
+            onClick={handleTryClick}
             className="ml-2 inline-flex items-center rounded-lg text-sm font-medium px-3 py-1.5 bg-white text-black hover:bg-white/90"
           >
             Try free
           </Link>
         </nav>
 
-        {/* Mobile button */}
+        {/* Mobile toggle */}
         <button
           aria-label="Menu"
           className="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-lg border border-white/15 bg-white/5"
           onClick={() => setOpen((s) => !s)}
         >
           <span className="sr-only">Toggle menu</span>
-          {/* burger */}
           <div className="space-y-1">
             <span className="block w-5 h-0.5 bg-white"></span>
             <span className="block w-5 h-0.5 bg-white"></span>
@@ -80,8 +95,11 @@ export default function Navbar() {
             ))}
             <Link
               href="/#try"
+              onClick={(e) => {
+                handleTryClick(e);
+                setOpen(false);
+              }}
               className="mt-1 inline-flex w-fit items-center rounded-lg text-sm font-medium px-3 py-1.5 bg-white text-black hover:bg-white/90"
-              onClick={() => setOpen(false)}
             >
               Try free
             </Link>

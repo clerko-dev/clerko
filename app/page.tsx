@@ -42,6 +42,13 @@ export default function Page() {
     URL.revokeObjectURL(url);
   };
 
+  const smoothToTry: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
+    e.preventDefault();
+    document
+      .getElementById("try")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <div className="space-y-12">
       {/* HERO */}
@@ -56,7 +63,11 @@ export default function Page() {
           Type a few fields, see the preview, copy or export.
         </p>
         <div className="mt-6 flex justify-center">
-          <a href="#try" className="inline-flex items-center rounded-lg text-sm font-medium px-4 py-2 bg-white text-black hover:bg-white/90">
+          <a
+            href="#try"
+            onClick={smoothToTry}
+            className="inline-flex items-center rounded-lg text-sm font-medium px-4 py-2 bg-white text-black hover:bg-white/90"
+          >
             Try free
           </a>
         </div>
@@ -65,21 +76,28 @@ export default function Page() {
       {/* HOW IT WORKS */}
       <section className="grid md:grid-cols-3 gap-4">
         <GlassCard>
-          <div className="text-sm uppercase tracking-wide text-white/60 mb-2">Step 1</div>
+          <div className="text-sm uppercase tracking-wide text-white/60 mb-2">
+            Step 1
+          </div>
           <div className="font-semibold">Fill client & scope</div>
           <div className="text-sm text-white/70 mt-1">
-            Add client name, service and price. Optional notes for timing or milestones.
+            Add client name, service and price. Optional notes for timing or
+            milestones.
           </div>
         </GlassCard>
         <GlassCard>
-          <div className="text-sm uppercase tracking-wide text-white/60 mb-2">Step 2</div>
+          <div className="text-sm uppercase tracking-wide text-white/60 mb-2">
+            Step 2
+          </div>
           <div className="font-semibold">Preview instantly</div>
           <div className="text-sm text-white/70 mt-1">
             Your proposal renders live. Tweak text until it reads perfectly.
           </div>
         </GlassCard>
         <GlassCard>
-          <div className="text-sm uppercase tracking-wide text-white/60 mb-2">Step 3</div>
+          <div className="text-sm uppercase tracking-wide text-white/60 mb-2">
+            Step 3
+          </div>
           <div className="font-semibold">Copy or export</div>
           <div className="text-sm text-white/70 mt-1">
             Copy to clipboard or download .txt. PDF & saved templates in Pro.
@@ -88,7 +106,10 @@ export default function Page() {
       </section>
 
       {/* GENERATOR + PREVIEW */}
-      <section id="try" className="grid md:grid-cols-2 gap-6">
+      <section
+        id="try"
+        className="grid md:grid-cols-2 gap-6 anchor-offset"
+      >
         <GlassCard>
           <div className="grid gap-4">
             <label className="text-sm block">
