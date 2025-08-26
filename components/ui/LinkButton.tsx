@@ -1,4 +1,4 @@
-import Link, { LinkProps } from "next/link";
+﻿import Link, { LinkProps } from "next/link";
 import React from "react";
 
 type Props = LinkProps &

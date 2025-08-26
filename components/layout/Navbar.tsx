@@ -4,6 +4,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Logo from "@/components/ui/Logo";
+import LinkButton from "@/components/ui/LinkButton";
 
 const LINKS = [
   { href: "/", label: "Home" },
@@ -36,17 +37,16 @@ export default function Navbar() {
     <header className="sticky top-0 z-40 backdrop-blur bg-black/30 border-b border-white/10">
       <div className="mx-auto max-w-7xl px-4 md:px-6 h-14 flex items-center justify-between">
         <Logo />
+
         {/* Desktop */}
         <nav className="hidden md:flex items-center gap-2">
           {LINKS.map((l) => (
             <NavItem key={l.href} {...l} />
           ))}
-          <Link
-            href="/#try"
-            className="ml-2 inline-flex items-center rounded-lg text-sm font-medium px-3 py-1.5 bg-white text-black hover:bg-white/90"
-          >
+          {/* gradientowy, przewija do sekcji */}
+          <LinkButton href="/#try" variant="primary" className="ml-2">
             Try free
-          </Link>
+          </LinkButton>
         </nav>
 
         {/* Mobile toggle */}
@@ -78,13 +78,14 @@ export default function Navbar() {
                 {l.label}
               </Link>
             ))}
-            <Link
+            <LinkButton
               href="/#try"
-              className="mt-1 inline-flex w-fit items-center rounded-lg text-sm font-medium px-3 py-1.5 bg-white text-black hover:bg-white/90"
+              variant="primary"
+              className="mt-1 w-fit"
               onClick={() => setOpen(false)}
             >
               Try free
-            </Link>
+            </LinkButton>
           </nav>
         </div>
       )}
