@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Link from "next/link";
 import { Inter } from "next/font/google";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+
 const inter = Inter({ subsets: ["latin"] });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://clerko.vercel.app";
@@ -26,39 +28,31 @@ export const metadata: Metadata = {
     images: ["/og-default.png"],
   },
   robots: {
-  index: false,
-  follow: false,
-  googleBot: { index: false, follow: false },
-},
-  // verification: { google: "WPROWADZIMY PRZY GO-LIVE" },
+    index: isIndexable,
+    follow: isIndexable,
+    googleBot: { index: isIndexable, follow: isIndexable },
+  },
+  // verification: { google: "ADD_WHEN_GO_LIVE" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-[var(--background)] text-[var(--foreground)] min-h-screen`}>
-        <header className="sticky top-0 z-30 border-b border-white/10 backdrop-blur bg-black/30">
-          <nav className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-            <Link href="/" className="font-semibold tracking-tight">Clerko</Link>
-            <div className="flex items-center gap-6 text-sm">
-              <Link href="/tools">Tools</Link>
-              <Link href="/how-to">Guides</Link>
-              <Link href="/store">Templates</Link>
-            </div>
-          </nav>
-        </header>
+      <body className={`${inter.className} min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased`}>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-black text-white px-3 py-1 rounded"
+        >
+          Skip to content
+        </a>
 
-        <main className="max-w-6xl mx-auto px-4 py-10">{children}</main>
+        <Navbar />
 
-        <footer className="mt-20 border-t border-white/10">
-          <div className="max-w-6xl mx-auto px-4 py-8 text-sm flex flex-col md:flex-row gap-3 md:gap-6 md:items-center md:justify-between">
-            <div>© {new Date().getFullYear()} Clerko</div>
-            <div className="flex gap-5">
-              <Link href="/privacy">Privacy</Link>
-              <Link href="/terms">Terms</Link>
-            </div>
-          </div>
-        </footer>
+        <main id="main" className="mx-auto max-w-7xl px-4 md:px-6 py-8">
+          {children}
+        </main>
+
+        <Footer />
       </body>
     </html>
   );
