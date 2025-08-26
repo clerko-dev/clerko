@@ -4,48 +4,33 @@
 
 :root { color-scheme: dark; }
 
-/* --- Reusable utilities (avoid @apply custom classes in other rules) --- */
+/* Reusable visual helpers (pure CSS to avoid PostCSS issues) */
 .glass {
-  background-color: rgba(255, 255, 255, 0.04); /* white/5-ish */
-  border: 1px solid rgba(255, 255, 255, 0.10); /* white/10 */
+  background-color: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.10);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
 .btn-gradient {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem 1rem;
-  border-radius: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  background-image: linear-gradient(135deg, #7C3AED, #22D3EE);
-  color: #0b0b0f;
+  position: relative; display: inline-flex; align-items: center; justify-content: center;
+  padding: .8rem 1rem; border-radius: .9rem; font-weight: 600; letter-spacing: .2px;
+  background-image: linear-gradient(135deg,#7C3AED,#22D3EE); color: #0b0b0f;
 }
-.btn-gradient:hover { opacity: .95; }
+.btn-gradient:hover { opacity: .96 }
 .btn-outline {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.625rem 0.9rem;
-  border-radius: 0.75rem;
-  border: 1px solid rgba(255,255,255,.15);
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: .7rem .95rem; border-radius: .9rem; border: 1px solid rgba(255,255,255,.15);
 }
 
-/* Forms */
-.form-input, .form-textarea {
-  width: 100%;
-  padding: 0.75rem;
-  border-radius: 0.75rem;
-  background-color: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.10);
-  color: #e7e7ea;
-  outline: none;
+/* Inputs */
+.input, .textarea {
+  width: 100%; padding: .8rem; border-radius: .9rem;
+  background-color: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.10);
+  color: #e7e7ea; outline: none;
 }
-.form-input::placeholder, .form-textarea::placeholder { color: rgba(231,231,234,.4); }
-.form-textarea { min-height: 120px; resize: vertical; }
+.input::placeholder, .textarea::placeholder { color: rgba(231,231,234,.4) }
+.textarea { min-height: 120px; resize: vertical }
 
-/* Typography tweaks */
-h1, .h1 { font-weight: 800; letter-spacing: -0.02em; }
-h2, .h2 { font-weight: 700; letter-spacing: -0.01em; }
+/* Typography helpers */
+.h1 { font-weight: 800; letter-spacing: -0.02em }
+.h2 { font-weight: 700; letter-spacing: -0.01em }
