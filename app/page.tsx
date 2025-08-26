@@ -43,7 +43,7 @@ export default function Page() {
   };
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-12">
       {/* HERO */}
       <section className="rounded-2xl bg-hero p-8 md:p-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
@@ -55,10 +55,40 @@ export default function Page() {
         <p className="mt-3 text-white/70">
           Type a few fields, see the preview, copy or export.
         </p>
+        <div className="mt-6 flex justify-center">
+          <a href="#try" className="inline-flex items-center rounded-lg text-sm font-medium px-4 py-2 bg-white text-black hover:bg-white/90">
+            Try free
+          </a>
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section className="grid md:grid-cols-3 gap-4">
+        <GlassCard>
+          <div className="text-sm uppercase tracking-wide text-white/60 mb-2">Step 1</div>
+          <div className="font-semibold">Fill client & scope</div>
+          <div className="text-sm text-white/70 mt-1">
+            Add client name, service and price. Optional notes for timing or milestones.
+          </div>
+        </GlassCard>
+        <GlassCard>
+          <div className="text-sm uppercase tracking-wide text-white/60 mb-2">Step 2</div>
+          <div className="font-semibold">Preview instantly</div>
+          <div className="text-sm text-white/70 mt-1">
+            Your proposal renders live. Tweak text until it reads perfectly.
+          </div>
+        </GlassCard>
+        <GlassCard>
+          <div className="text-sm uppercase tracking-wide text-white/60 mb-2">Step 3</div>
+          <div className="font-semibold">Copy or export</div>
+          <div className="text-sm text-white/70 mt-1">
+            Copy to clipboard or download .txt. PDF & saved templates in Pro.
+          </div>
+        </GlassCard>
       </section>
 
       {/* GENERATOR + PREVIEW */}
-      <section className="grid md:grid-cols-2 gap-6">
+      <section id="try" className="grid md:grid-cols-2 gap-6">
         <GlassCard>
           <div className="grid gap-4">
             <label className="text-sm block">
@@ -103,7 +133,6 @@ export default function Page() {
                 className="mt-1 w-full rounded-lg bg-black/30 border border-white/10 px-3 py-2 outline-none focus:ring-2 focus:ring-white/20"
               />
             </label>
-            {/* Ten przycisk można zostawić dla UX, ale preview i tak aktualizuje się automatycznie */}
             <Button className="mt-2" type="button">
               Generate preview
             </Button>
@@ -114,10 +143,10 @@ export default function Page() {
           <div className="flex items-center justify-between mb-3">
             <h2 className="font-semibold">Preview</h2>
             <div className="flex items-center gap-2">
-              <Button variant="secondary" onClick={copy}>
+              <Button variant="secondary" onClick={copy} aria-label="Copy proposal">
                 Copy
               </Button>
-              <Button variant="secondary" onClick={downloadTxt}>
+              <Button variant="secondary" onClick={downloadTxt} aria-label="Download proposal as .txt">
                 Download .txt
               </Button>
               <span
@@ -140,28 +169,6 @@ export default function Page() {
           <p className="mt-3 text-xs text-white/60">
             Pro tip: Pro plan adds PDF export, saved templates, and branding.
           </p>
-        </GlassCard>
-      </section>
-
-      {/* FEATURES */}
-      <section className="grid md:grid-cols-3 gap-4">
-        <GlassCard>
-          <div className="font-semibold">Templates</div>
-          <div className="text-sm text-white/70">
-            Start with ready-made industry templates.
-          </div>
-        </GlassCard>
-        <GlassCard>
-          <div className="font-semibold">Export</div>
-          <div className="text-sm text-white/70">
-            One-click (PDF/Docs/Notion — soon).
-          </div>
-        </GlassCard>
-        <GlassCard>
-          <div className="font-semibold">Tracking</div>
-          <div className="text-sm text-white/70">
-            See if a client opened your proposal (Pro).
-          </div>
         </GlassCard>
       </section>
     </div>
